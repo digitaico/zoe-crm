@@ -6,6 +6,9 @@
 		<div class="pull-left">
 			<a href="{{ route('contacts.create') }}" class="btn btn-primary" >Add new Contact</a>
 		</div>
+		<div class="pull-right">
+			<a href="{{ route('fetchApi') }}" class="btn btn-warning" >Update Contacts from HubSpot</a>
+		</div>
 	</div>
 </div>
 
@@ -22,8 +25,8 @@
 			<th scope="col">First Name</th>
 			<th scope="col">Last Name</th>
 			<th scope="col">Email</th>
-			<th scope="col">Status</th>
 			<th scope="col">Creation Date</th>
+			<th scope="col">Management</th>
 		</tr>
 	</thead>
 	<tbody>

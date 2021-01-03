@@ -106,4 +106,6 @@ class ContactsController extends Controller
 		return redirect()->route('contacts.index')
 			->with('success', 'Zoe contact was deleted.');
     }
+
+
 }
