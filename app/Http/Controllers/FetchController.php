@@ -24,12 +24,11 @@ class FetchController extends Controller
 		$response = $client->request('GET', '?hapikey='.$apikey);
 		$arr = json_decode($response->getBody());
 		//dd($arr);
-		// cada miembro del array es un objeto.
-		foreach($arr as  $obj) {
-			// aqui uso cada objeto.
-			foreach($obj as $data) {
-				echo $data->vid;	
+		// tengo un objeto : key : "contacts", value : array conformado por objetos.
+		foreach($arr->contacts as  $obj) {
+			// aqui inserto a DB cada objeto.
+				echo $obj->vid."<br />";	
 			}
 		}		
 	}
-}
+
