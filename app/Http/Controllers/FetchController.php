@@ -28,6 +28,8 @@ class FetchController extends Controller
 		foreach($arr->contacts as  $obj) {
 			// aqui inserto a DB cada objeto.
 				echo $obj->vid."<br />";	
+				// aqui newcesito usar ContactsController.store()	
+
 			}
 		}		
 	}
