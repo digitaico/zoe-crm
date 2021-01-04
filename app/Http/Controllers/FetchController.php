@@ -27,7 +27,7 @@ class FetchController extends Controller
 		// tengo un objeto : key : "contacts", value : array conformado por objetos.
 		foreach($arr->contacts as  $obj) {
 			// aqui inserto a DB cada objeto.
-				echo $obj->vid."<br />";	
+				print_r($obj->vid." | ".$obj->properties->firstname->value." | ".$obj->addedAt."<br />");	
 				// aqui newcesito usar ContactsController.store()	
 
 			}
