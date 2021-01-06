@@ -16,7 +16,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-		$contacts = DB::table('contacts')->paginate(25);
+		$contacts = DB::table('contacts')->paginate(10);
 		return view('contacts.index', ['contacts' => $contacts]);
     }
 
@@ -38,11 +38,13 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
+		/*
 		$request->validate([
-			'first_name' => 'required',	
-			'last_name' => 'required',	
-			'email' => 'required'	
+			'first_name' => 'required|string|min:3|max:200',	
+			'last_name' => 'required|string|min:4|max:200',	
+			'email' => 'required|string|min:4|max:200'	
 		]);
+		 */
 
 		Contacts::create($request->all());
 

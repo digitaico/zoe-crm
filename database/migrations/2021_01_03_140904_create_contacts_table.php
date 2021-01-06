@@ -17,7 +17,7 @@ class CreateContactsTable extends Migration
             $table->increments('id')->unique()->index();
 			$table->text('first_name');
 			$table->text('last_name');
-			$table->text('email')->unique->index();
+			$table->text('email')->index();
 			$table->string('vid', 50)->nullable()->index();
             $table->timestamps();
         });

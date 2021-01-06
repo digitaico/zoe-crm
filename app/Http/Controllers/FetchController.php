@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\Contacts;
+use DB;
 
 class FetchController extends Controller
 {
@@ -20,17 +22,35 @@ class FetchController extends Controller
 			'timeout'=> 2.0,
 		]);
 
-		$apikey = "f86d7c87-ae50-448b-baff-0d38ece70c5c";
+		$apikey = "demo";
+		$array = [];
 		$response = $client->request('GET', '?hapikey='.$apikey);
 		$arr = json_decode($response->getBody());
 		//dd($arr);
 		// tengo un objeto : key : "contacts", value : array conformado por objetos.
 		foreach($arr->contacts as  $obj) {
-			// aqui inserto a DB cada objeto.
-				print_r($obj->vid." | ".$obj->properties->firstname->value." | ".$obj->addedAt."<br />");	
-				// aqui newcesito usar ContactsController.store()	
+			$hs_epoch = (int) substr($obj->addedAt,0,-3);
+			$hs_date = date('Y-m-d H:i:s',$hs_epoch);
+			$vid = $obj->vid;
+			$email =  $obj->{'identity-profiles'}[0]->identities[0]->value;
 
+			$array['first_name'] = $vid;
+			$array['last_name']  = $vid;
+			$array['email'] = $email;
+			$array['vid'] = $vid;
+			$array['created_at'] = $hs_date;
+			$array['updated_at'] = date('Y-m-d H:i:s');
+
+			try{
+				Contacts::insertOrIgnore($array);
+			} catch (Exception $e) {
+				return redirect()->route('contacts.index')
+					 ->with('error','HubSpot data does not conform to API requirements!.');
 			}
-		}		
-	}
+		}
+
+		return redirect()->route('contacts.index')
+				   ->with('success','Zoe Contact added succesfully.');
+	}		
+}
 
