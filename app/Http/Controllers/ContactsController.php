@@ -38,13 +38,13 @@ class ContactsController extends Controller
      */
     public function store(Request $request)
     {
-		/*
+		
 		$request->validate([
 			'first_name' => 'required|string|min:3|max:200',	
 			'last_name' => 'required|string|min:4|max:200',	
 			'email' => 'required|string|min:4|max:200'	
 		]);
-		 */
+		 
 
 		Contacts::create($request->all());
 
